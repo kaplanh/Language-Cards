@@ -11,7 +11,7 @@
 |  [Conditional rendering](https://react.dev/learn#conditional-rendering)   |                                  | [Visit me on Linkedin](https://www.linkedin.com/in/kaplan-h/)                    |
 |  [rendering list](https://react.dev/learn#rendering-lists)                                                       |                                            |                                                                                  |
 | [React-Bootstrap](https://react-bootstrap.netlify.app/)                      | npm i / yarn add react-bootstrap bootstrap |                                                                                  |
-| Deploy with [Vercel](https://vercel.com/dashboard)                           |                                            |                                                                                  |
+| Deploy with [netlify](https://app.netlify.com/teams/kaplanh/overview)                           |                                            |                                                                                  |
 
 ---
 
