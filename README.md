@@ -1,8 +1,8 @@
 # Language-Cards
-[Click me!](https://kaplan-react-language-card.netlify.app/)
 
 ![language-cards](https://user-images.githubusercontent.com/101884444/178757500-e555b28e-e40e-4961-8da6-f43e237c5efa.gif)
 
+[:point_right: Click here to see on browser](https://kaplan-react-language-card.netlify.app/)
 ---
 
 | **What's used in this app ?**                                                | **How use third party libraries**          | **Author**                                                                       |
@@ -81,33 +81,42 @@ OR
 ## Project Skeleton
 
 ```
-nba legends (folder)
+Language-Cards App(folder)
 |
 |----public (folder)
 │     └── index.html
 |----src (folder)
 |    |--- components (folder)
-│    │       ├── ContainerCard.jsx
-│    │       ├── Header.jsx
-│    │       ├── PlayerCard.jsx
+|    |       |── header(folder)
+│    │       |     ├── Header.jsx
+│    │       |     ├── Header.css
+│    │       |
+|    |       |── item(folder)
+│    │       |     ├── Item.jsx
+│    │       |     ├── Item.css
+│    │       |
+|    |       |── card(folder)
+│    │             ├── Card.jsx
+│    │             ├── Card.css
 │    │
 |    |--- helper (folder)
-|    |       |── data.js
-│    │
-│    |--- assets (folder)
-|    |      ├── nba-logo.png
-|    |
+|    |       |── data.js                         
+|    |                             
+|    |--- assets (folder)
+|    |       |── images                        
+|    |       
 │    ├--- App.js
-│    │--- data.js
-│    |--- index.js
-│    ├--- index.css
+│    ├--- App.css
+│    └--- index.js
+│    └--- img(folder)
 │
 │
-|-- .gitignore
+|--- .gitignore
 |── package-lock.json
 ├── package.json
 |── README.md
 |── yarn.lock
+
 
 
 ```
@@ -116,133 +125,55 @@ nba legends (folder)
 
 ### At the end of the project, the following topics are to be covered;
 
--   Lifting state up
-
-    ```jsx
-    // src/App.jsx
-        import CardContainer from "./components/cardcontainer/CardContainer";
-    import Header from "./components/header/Header";
-
-    import { useState } from "react";
-
-    function App() {
-       ** const [search, setSearch] = useState(""); **
-        return (
-            <div>
-              **  <Header setSearch={setSearch} />**
-              **  <CardContainer search={search} />**
-            </div>
-        );
-    }
-
-    export default App;
-
-
-    // src/Header.jsx
-    import img from "../../assets/nba-logo.png";
-
-    **const Header = ({ setSearch }) => {**
-        return (
-            <div className="text-center mt-4 ">
-                <img src={img} alt="" />
-                <h1>NBA Legends</h1>
-                <input
-                    **onChange={(e) => setSearch(e.target.value)}**
-                    className="form-control w-50 mx-auto m-5"
-                    type="search"
-                    name="name"
-                    id="name"
-                    placeholder="Search Player..."
-                />
-            </div>
-        );
-    };
-
-    export default Header;
-
-
-
-    // src/CardContainer.jsx
-    import { data } from "../../helper/data";
-    import PlayerCard from "../playercard/PlayerCard.jsx";
-    const CardContainer = ({ search }) => {
-        return (
-            <div className="container">
-                <div className=" row ">
-                    {data
-                        .filter((player) =>
-                            player.name
-                                .toLocaleLowerCase()
-                                .includes(search.trim().toLocaleLowerCase())
-                        )
-                        .map((player, i) => (
-                            <PlayerCard key={i} {...player} />
-                        ))}
-                </div>
-            </div>
-        );
-    };
-    ```
-
-export default CardContainer;
 
         ```
 
 -   conditional rendering
 
     ```jsx
-    import Img from "./Img";
-    import Ul from "./Ul";
-    import "./PlayerCard.css";
-
-    import { useState } from "react";
-
-    const PlayerCard = ({ img, name, statistics }) => {
-        const [visible, setVisible] = useState(true);
-
-        const handleClick = () => {
-            setVisible(!visible);
-        };
-
-        return (
-            <div
-                className=" col col-md-6 col-lg-4 col-xl-3 p-2"
-                style={{ height: "450px" }}
-            >
-                <div onClick={handleClick} className="card h-100 border-0 ">
-                    {visible ? (
-                        <Img img={img} />
-                    ) : (
-                        <Ul statistics={statistics} />
-                    )}
-                    <div className="card-body h-25 ">
-                        <h5 className="card-title">{name}</h5>
-                    </div>
-                </div>
+    import { useState } from 'react';
+    import './Item.css';
+    
+    const Item = ({ card }) => {
+      const [showLogo, setShowLogo] = useState(true);
+    
+      const { name, img, options } = card;
+    
+      const handleClick = () => {
+        setShowLogo(!showLogo);
+      };
+    
+      return (
+        <div className="card" onClick={handleClick}>
+          {showLogo ? (
+            <div>
+              <img className="card-logo" src={img} alt="" />
+              <h3 className="card-title">{name}</h3>
             </div>
-        );
+          ) : (
+            <ul className="list">
+              {options.map((element, index) => {
+                return <li key={index}>{element}</li>;
+              })}
+            </ul>
+          )}
+        </div>
+      );
     };
-
-    export default PlayerCard;
+    
+    export default Item;
     ```
 
--   yükseklikleri farkli olan img leri esitlemek icin
+-   Rendiring list
 
     ```jsx
-    const Img = ({ img }) => {
-        return (
-            <div className="img-container h-75">
-                <img
-                    src={img}
-                    className="card-img-top h-100 rounded-0"
-                    alt="player"
-                />
-            </div>
-        );
-    };
-
-    export default Img;
+       <ul className="list">
+          {options.map((element, index) => {
+            return <li key={index}>{element}</li>;
+          })}
+        </ul>
     ```
+
 
 ---
 
